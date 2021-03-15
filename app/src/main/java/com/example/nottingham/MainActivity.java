@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView ticker_tape1 = findViewById(R.id.ticker_tape1);
+        ticker_tape1.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        ticker_tape1.setSelected(true);
+
         quick_access = (Button)findViewById(R.id.button);
         quick_access.setBackgroundColor(Color.WHITE);
         quick_access.setOnClickListener(new View.OnClickListener(){
