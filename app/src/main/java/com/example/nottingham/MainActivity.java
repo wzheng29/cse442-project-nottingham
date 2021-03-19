@@ -44,12 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
         PyObject DowChange = pyobj.callAttr("getChange", "^DJI");
         ticker_Dow.setText("DJI " + DowChange.toString() + "%");
+        setColor(ticker_Dow, DowChange.toString());
 
         PyObject SnPChange = pyobj.callAttr("getChange", "^GSPC");
         ticker_SnP500.setText("GSPC " + SnPChange.toString() + "%");
+        setColor(ticker_SnP500, SnPChange.toString());
 
         PyObject NasdaqChange = pyobj.callAttr("getChange", "^IXIC");
         ticker_Nasdaq.setText("IXIC " + NasdaqChange.toString() + "%");
+        setColor(ticker_Nasdaq, NasdaqChange.toString());
 
         quick_access = (Button)findViewById(R.id.button);
         quick_access.setBackgroundColor(Color.WHITE);
@@ -65,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
         Intent intent  = new Intent(this, quick_access.class);
         startActivity(intent);
     }
-
+    public void setColor(TextView tv, String s){
+        if(s.contains("+")){
+            tv.setTextColor(Color.parseColor("#008000"));
+        }
+        else if(s.contains("-")){
+            tv.setTextColor(Color.parseColor("#ff0000"));
+        }
+        else{
+            tv.setTextColor(Color.parseColor("#ffffff"));
+        }
+    }
 
 }
