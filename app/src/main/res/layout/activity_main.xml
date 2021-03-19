@@ -7,16 +7,51 @@
     android:background="#333333"
     tools:context=".MainActivity">
 
+
     <TextView
+        android:id="@+id/ticker_SnP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ticker_tape1"
-        android:layout_centerInParent="true"
-        android:text="This is the home page----This is the home page"
-        android:textSize="30sp"
-        android:singleLine="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="262dp"
+        android:layout_marginEnd="269dp"
+        android:layout_marginRight="269dp"
         android:scrollHorizontally="true"
-        android:textColor="@color/white"/>
+        android:singleLine="true"
+        android:text="@string/SnP500_ticker"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/ticker_Dow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="335dp"
+        android:layout_marginEnd="173dp"
+        android:layout_marginRight="173dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@string/DOW_ticker"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/ticker_Nasdaq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="199dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginRight="136dp"
+        android:text="@string/Nasdaq_ticker"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/button"
@@ -29,5 +64,8 @@
         android:textSize="30sp"
         android:background="@color/white"
         android:textColor="@color/black"/>
+
+
+
 
 </RelativeLayout>
