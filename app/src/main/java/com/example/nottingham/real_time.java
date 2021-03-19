@@ -16,14 +16,9 @@ public class real_time extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
 
-        backHome = (Button)findViewById(R.id.button);
+        backHome = (Button)findViewById(R.id.backHome);
         backHome.setBackgroundColor(Color.WHITE);
-        backHome.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                openHome();
-            }
-        });
+        backHome.setOnClickListener(v -> openHome());
     }
 
     public void openHome(){
