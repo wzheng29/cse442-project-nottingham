@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         else if(s.contains("-")){
             tv.setTextColor(Color.parseColor("#ff0000"));
         }
-        else{
+        else {
             tv.setTextColor(Color.parseColor("#ffffff"));
         }
     }
