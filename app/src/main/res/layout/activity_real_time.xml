@@ -17,6 +17,7 @@
         android:layout_marginRight="307dp"
         android:layout_marginBottom="667dp"
         android:text="Back"
+        android:textColor="#121111"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
