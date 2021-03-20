@@ -23,4 +23,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/stockName"
+        android:layout_width="122dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="271dp"
+        android:layout_marginRight="271dp"
+        android:layout_marginBottom="606dp"
+        android:text="Apple"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backHome"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <TextView
+        android:id="@+id/realTimePrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="318dp"
+        android:layout_marginRight="318dp"
+        android:layout_marginBottom="562dp"
+        android:text="$0.0"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stockName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
