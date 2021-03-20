@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nottingham">
         <activity android:name=".quick_access"></activity>
+        <activity android:name=".real_time"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

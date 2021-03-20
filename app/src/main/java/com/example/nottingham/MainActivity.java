@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private Button quick_access;
+    private Button real_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,22 @@ public class MainActivity extends AppCompatActivity {
                 openQuickAccess();
             }
         });
+
+
+        real_time = (Button)findViewById(R.id.apple);
+        real_time.setBackgroundColor(Color.WHITE);
+        real_time.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openRealTime();
+            }
+        });
     }
 
+    public void openRealTime(){
+        Intent intent  = new Intent(this, real_time.class);
+        startActivity(intent);
+    }
     public void openQuickAccess(){
         Intent intent  = new Intent(this, quick_access.class);
         startActivity(intent);

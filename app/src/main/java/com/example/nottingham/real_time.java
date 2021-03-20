@@ -19,6 +19,7 @@ public class real_time extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
+
         // Back Button implementation
         backHome = (Button)findViewById(R.id.backHome);
         backHome.setBackgroundColor(Color.WHITE);
