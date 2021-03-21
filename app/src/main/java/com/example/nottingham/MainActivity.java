@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView ticker_SnP500 = findViewById(R.id.ticker_SnP);
         ticker_SnP500.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        ticker_Dow.setSelected(true);
+        ticker_SnP500.setSelected(true);
 
         TextView ticker_Nasdaq = findViewById(R.id.ticker_Nasdaq);
         ticker_Nasdaq.setEllipsize(TextUtils.TruncateAt.MARQUEE);
@@ -42,17 +42,18 @@ public class MainActivity extends AppCompatActivity {
 
         Python py = Python.getInstance();
         PyObject pyobj = py.getModule("stockGetter");
+        String padding = "                               ";
 
         PyObject DowChange = pyobj.callAttr("getChange", "^DJI");
-        ticker_Dow.setText("DJI " + DowChange.toString() + "%");
+        ticker_Dow.setText(padding+"DJI " + DowChange.toString() + "%"+padding);
         setColor(ticker_Dow, DowChange.toString());
 
         PyObject SnPChange = pyobj.callAttr("getChange", "^GSPC");
-        ticker_SnP500.setText("GSPC " + SnPChange.toString() + "%");
+        ticker_SnP500.setText(padding+"GSPC " + SnPChange.toString() + "%"+padding);
         setColor(ticker_SnP500, SnPChange.toString());
 
         PyObject NasdaqChange = pyobj.callAttr("getChange", "^IXIC");
-        ticker_Nasdaq.setText("IXIC " + NasdaqChange.toString() + "%");
+        ticker_Nasdaq.setText(padding+"IXIC " + NasdaqChange.toString() + "%"+padding);
         setColor(ticker_Nasdaq, NasdaqChange.toString());
 
         quick_access = (Button)findViewById(R.id.button);
