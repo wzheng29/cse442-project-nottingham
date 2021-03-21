@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.chaquo.python'
 }
 
 android {
@@ -12,6 +13,32 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        sourceSets {
+            main {
+                python {
+                    srcDirs = ["src/main/python"]
+                }
+            }
+        }
+        python {
+
+            buildPython "C:/Users/Steve/AppData/Local/Programs/Python/Python38/python.exe"
+            buildPython "C:/Users/Steve/AppData/Local/Programs/Python/Python38/python.exe"
+
+        }
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+        python{
+            pip {
+
+                install "pandas"
+                install "pandas_datareader"
+                install "matplotlib"
+                install "numpy"
+
+            }
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
