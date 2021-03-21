@@ -5,44 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
-    private Button quick_access;
+public class searchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        quick_access = (Button)findViewById(R.id.button);
-        quick_access.setBackgroundColor(Color.WHITE);
-        quick_access.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                openQuickAccess();
-            }
-        });
-
-    }
-
-    public void openQuickAccess(){
-        Intent intent  = new Intent(this, quick_access.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_search);
+        handleIntent(getIntent());
     }
 
     @Override
@@ -58,4 +32,21 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent){
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())){
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            searching(query);
+        }
+    }
+
+    public void searching (String query){
+        Intent intent  = new Intent(this, quick_access.class);
+        startActivity(intent);
+    }
 }
