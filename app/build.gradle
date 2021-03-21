@@ -27,10 +27,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters "armeabi-v7a"
+            abiFilters "armeabi-v7a", "x86", "x86_64"
         }
         python {
-            buildPython "C:/Users/eoin4/AppData/Local/Programs/Python/Python38-32/python.exe"
+            buildPython "C:/Users/winni/AppData/Local/Programs/Python/Python38/python.exe"
             pip {
                 install "pandas"
                 install "pandas_datareader"

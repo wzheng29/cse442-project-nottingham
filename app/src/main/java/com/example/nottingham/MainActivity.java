@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         if(!Python.isStarted()){
             Python.start(new AndroidPlatform(this));
         }
+
         Python py = Python.getInstance();
         PyObject pyobj = py.getModule("stockGetter");
 

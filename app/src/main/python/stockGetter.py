@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[21]:
+# In[28]:
 
 
 import pandas as pd
@@ -10,7 +10,8 @@ from datetime import datetime, timedelta
 def getPrice(tag):
     ticker = str(tag)
     endDate = datetime.date(datetime.now())
-    startDate = datetime.date(datetime.now() - timedelta(1))
+    weekday = endDate.weekday()
+    startDate = dayOWeek(weekday)
     frame = web.DataReader(ticker, 'yahoo', startDate, endDate)
     dayClose = round(frame["Close"][1], 2)
     return dayClose
@@ -18,7 +19,8 @@ def getPrice(tag):
 def getChange(tag):
     ticker = str(tag)
     endDate = datetime.date(datetime.now())
-    startDate = datetime.date(datetime.now() - timedelta(1))
+    weekday = endDate.weekday()
+    startDate = dayOWeek(weekday)
     frame = web.DataReader(ticker, 'yahoo', startDate, endDate)
     dayClose = round(frame["Close"][1], 2)
     ydayClose = round(frame["Close"][0], 2)
@@ -29,15 +31,12 @@ def getChange(tag):
         returnVal = str(change)
     return returnVal
 
-
-# In[23]:
-
-
-getChange("^DJI")
-
-
-# In[ ]:
-
-
-
+def dayOWeek(weekday):
+    if (weekday == 5):
+        startDate = datetime.date(datetime.now() - timedelta(2))
+    elif (weekday == 6):
+        startDate = datetime.date(datetime.now() - timedelta(3))
+    else:
+        startDate = datetime.date(datetime.now() - timedelta(1))
+    return startDate
 
