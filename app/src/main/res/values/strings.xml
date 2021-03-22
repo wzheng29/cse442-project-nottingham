@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Nottingham</string>
+    <string name="title_activity_quick__access">ScrollingActivity</string>
+    <string name="SnP500_ticker">GSPC +0.00%</string>
+    <string name="DOW_ticker">DJI  +0.00%</string>
+    <string name="Nasdaq_ticker">IXIC +0.00%</string>
+    <string name="Russel2000_ticker">RUT +0.00%</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
