@@ -18,7 +18,7 @@ def getPrice(tag):
     weekday = endDate.weekday()
     startDate = dayOWeek(weekday)
     frame = pdr.DataReader(ticker, 'yahoo', startDate, endDate)
-    dayClose = round(frame["Close"][0], 2)
+    dayClose = round(frame["Close"][1], 2)
     return dayClose
 
 def dayOWeek(weekday):

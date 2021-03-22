@@ -56,7 +56,7 @@ android {
             abiFilters "armeabi-v7a", "x86", "x86_64"
         }
         python {
-            buildPython "C:/Users/winni/AppData/Local/Programs/Python/Python38/python.exe"
+
             pip {
                 install "pandas"
                 install "pandas_datareader"
