@@ -36,6 +36,8 @@ def dayOWeek(weekday):
         startDate = datetime.date(datetime.now() - timedelta(2))
     elif (weekday == 6):
         startDate = datetime.date(datetime.now() - timedelta(3))
+    elif (weekday == 0):
+        startDate = datetime.date(datetime.now() - timedelta(3))
     else:
         startDate = datetime.date(datetime.now() - timedelta(1))
     return startDate
