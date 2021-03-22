@@ -6,9 +6,20 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    buildFeatures {
+        dataBinding true
+    }
 
     defaultConfig {
         applicationId "com.example.nottingham"
+
+        sourceSets{
+            main{
+                python{
+                    python.srcDir "src/main/python"
+                }
+            }
+        }
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
@@ -41,6 +52,18 @@ android {
         }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi-v7a", "x86", "x86_64"
+        }
+        python {
+            buildPython "C:/Users/winni/AppData/Local/Programs/Python/Python38/python.exe"
+            pip {
+                install "pandas"
+                install "pandas_datareader"
+                install "datetime"
+            }
+        }
+
     }
 
     buildTypes {
