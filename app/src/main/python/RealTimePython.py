@@ -15,10 +15,23 @@ def getCSV(tag, start):
 def getPrice(tag):
     ticker = str(tag)
     endDate = datetime.date(datetime.now())
-    startDate = datetime.date(datetime.now() - timedelta(1))
+    weekday = endDate.weekday()
+    startDate = dayOWeek(weekday)
     frame = pdr.DataReader(ticker, 'yahoo', startDate, endDate)
     dayClose = round(frame["Close"][0], 2)
     return dayClose
+
+def dayOWeek(weekday):
+    if (weekday == 5):
+        startDate = datetime.date(datetime.now() - timedelta(2))
+    elif (weekday == 6):
+        startDate = datetime.date(datetime.now() - timedelta(3))
+    elif (weekday == 0):
+        startDate = datetime.date(datetime.now() - timedelta(3))
+    else:
+        startDate = datetime.date(datetime.now() - timedelta(1))
+    return startDate
+
 
 def Plotter ( tag, start):
 
