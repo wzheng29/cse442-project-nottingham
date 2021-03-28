@@ -1,19 +1,69 @@
 plugins {
     id 'com.android.application'
+    id 'com.chaquo.python'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    buildFeatures {
+        dataBinding true
+    }
 
     defaultConfig {
         applicationId "com.example.nottingham"
+
+        sourceSets{
+            main{
+                python{
+                    python.srcDir "src/main/python"
+                }
+            }
+        }
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        sourceSets {
+            main {
+                python {
+                    srcDirs = ["src/main/python"]
+                }
+            }
+        }
+        python {
+
+            buildPython "C:/Users/Steve/AppData/Local/Programs/Python/Python38/python.exe"
+            buildPython "C:/Users/Steve/AppData/Local/Programs/Python/Python38/python.exe"
+
+        }
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+        python{
+            pip {
+
+                install "pandas"
+                install "pandas_datareader"
+                install "matplotlib"
+                install "numpy"
+
+            }
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi-v7a", "x86", "x86_64"
+        }
+        python {
+
+            pip {
+                install "pandas"
+                install "pandas_datareader"
+                install "datetime"
+            }
+        }
+
     }
 
     buildTypes {

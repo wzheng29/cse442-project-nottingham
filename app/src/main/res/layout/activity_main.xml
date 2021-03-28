@@ -7,6 +7,63 @@
     android:background="#333333"
     tools:context=".MainActivity">
 
+
+    <TextView
+        android:id="@+id/ticker_SnP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="288dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginRight="180dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@string/SnP500_ticker"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/ticker_Dow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="370dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginRight="155dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@string/DOW_ticker"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/ticker_Nasdaq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="207dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginRight="155dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@string/Nasdaq_ticker"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="300dp"
@@ -18,5 +75,12 @@
         android:textSize="30dp"
         android:background="@color/white"
         android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/apple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apple"
+        android:textColor="#131313" />
 
 </RelativeLayout>
