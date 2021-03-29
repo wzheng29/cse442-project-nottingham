@@ -33,8 +33,7 @@ android {
         }
         python {
 
-            buildPython "C:/Users/Steve/AppData/Local/Programs/Python/Python38/python.exe"
-            buildPython "C:/Users/Steve/AppData/Local/Programs/Python/Python38/python.exe"
+            buildPython "C:/Users/eoin4/AppData/Local/Programs/Python/Python38-32/python.exe"
 
         }
         ndk {
