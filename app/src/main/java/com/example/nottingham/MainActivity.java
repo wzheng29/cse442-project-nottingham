@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Set ListView to GONE when app launches
         searchList = (ListView)findViewById(R.id.searchList);
         searchList.setVisibility(View.GONE);
+        searchList.setBackgroundColor(Color.WHITE);
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.stocks));
         searchList.setAdapter(arrayAdapter);
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         real_time = (Button)findViewById(R.id.apple);
+        real_time.setVisibility(View.GONE);
         real_time.setBackgroundColor(Color.WHITE);
         real_time.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -106,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Search bar setup
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -118,19 +122,23 @@ public class MainActivity extends AppCompatActivity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setQueryHint("Search...");
 
+        //Display ListView only when the search bar is expanded
         menuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 searchList.setVisibility(View.VISIBLE);
+                searchList.bringToFront();
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                return false;
+                searchList.setVisibility(View.GONE);
+                return true;
             }
         });
 
+        //Filtering search bar text
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
