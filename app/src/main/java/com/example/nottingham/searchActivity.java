@@ -20,19 +20,6 @@ public class searchActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_home,menu);
-
-        //Associate searchable config with SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_home).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-        return true;
-    }
-
-    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         handleIntent(intent);
@@ -41,12 +28,12 @@ public class searchActivity extends AppCompatActivity {
     private void handleIntent(Intent intent){
         if (Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
-            searching(query);
+            openRealTime(query);
         }
     }
 
-    public void searching (String query){
-        Intent intent  = new Intent(this, quick_access.class);
+    public void openRealTime (String query){
+        Intent intent  = new Intent(this, real_time.class);
         startActivity(intent);
     }
 }

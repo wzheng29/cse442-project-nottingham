@@ -7,4 +7,10 @@
     <string name="Russel2000_ticker">RUT +0.00%</string>
     <string name="action_settings">Settings</string>
 
+    <string-array name="stocks">
+        <item>Apple</item>
+        <item>Amazon</item>
+        <item>Tesla</item>
+    </string-array>
+
 </resources>
