@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, arrayAdapter.getItem(position),Toast.LENGTH_SHORT).show();
                 String name = arrayAdapter.getItem(position);
                 openRealTime(name,getSymbol(name));
             }
