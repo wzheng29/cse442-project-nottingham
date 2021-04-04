@@ -12,12 +12,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import androidx.appcompat.widget.SearchView;
 
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -29,9 +31,9 @@ import com.chaquo.python.android.AndroidPlatform;
 
 public class MainActivity extends AppCompatActivity {
     private Button quick_access;
-    private Button real_time;
     private ArrayAdapter<String> arrayAdapter;
     private ListView searchList;
+    private String[] stock_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
         searchList.setVisibility(View.GONE);
         searchList.setBackgroundColor(Color.WHITE);
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.stocks));
+        //Filter search
+        String [] stock_names;
+        stock_list = getResources().getStringArray(R.array.all_stocks);
+        stock_names = getStockNames();
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stock_names);
         searchList.setAdapter(arrayAdapter);
 
         //Instantiate Ticker text boxes
@@ -88,19 +94,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        real_time = (Button)findViewById(R.id.apple);
-        real_time.setVisibility(View.GONE);
-        real_time.setBackgroundColor(Color.WHITE);
-        real_time.setOnClickListener(new View.OnClickListener(){
+        searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v){
-                openRealTime();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, arrayAdapter.getItem(position),Toast.LENGTH_SHORT).show();
+                String name = arrayAdapter.getItem(position);
+                openRealTime(name,getSymbol(name));
             }
         });
     }
 
-    public void openRealTime(){
+    public void openRealTime(String stock_name, String stock_symbol){
         Intent intent  = new Intent(this, real_time.class);
+        intent.putExtra("name",stock_name);
+        intent.putExtra("symbol",stock_symbol);
         startActivity(intent);
     }
 
@@ -127,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 searchList.setVisibility(View.VISIBLE);
+                quick_access.setVisibility(View.GONE);
                 searchList.bringToFront();
                 return true;
             }
@@ -134,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 searchList.setVisibility(View.GONE);
+                quick_access.setVisibility(View.VISIBLE);
                 return true;
             }
         });
@@ -165,6 +174,27 @@ public class MainActivity extends AppCompatActivity {
         else {
             tv.setTextColor(Color.parseColor("#ffffff"));
         }
+    }
+
+    private String[] getStockNames(){
+        String[] names = new String[stock_list.length];
+        for(int i = 0; i < stock_list.length; i++){
+            String[] separated = stock_list[i].split(",");
+            names[i] = separated[0];
+        }
+        return names;
+    }
+
+    //Find symbol for the given stock name (Apple -> AAPLE)
+    private String getSymbol (String stockName){
+        for (String s : stock_list) {
+            String[] separated = s.split(",");
+            if (separated[0].equals(stockName)) {
+                return separated[1];
+            }
+        }
+        //Stock not found. GameStop as default
+        return "GME";
     }
 
 }

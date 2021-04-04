@@ -28,12 +28,14 @@ public class searchActivity extends AppCompatActivity {
     private void handleIntent(Intent intent){
         if (Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
-            openRealTime(query);
+            openRealTime();
         }
     }
 
-    public void openRealTime (String query){
+    public void openRealTime(){
         Intent intent  = new Intent(this, real_time.class);
+        intent.putExtra("name","GameStop");
+        intent.putExtra("symbol","GME");
         startActivity(intent);
     }
 }
