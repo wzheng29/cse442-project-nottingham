@@ -8,7 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="all_stocks">
-        <item>Apple,AAPLE</item>
+        <item>Apple,AAPL</item>
         <item>Microsoft,MSFT</item>
         <item>Amazon,AMZN</item>
         <item>Google,GOOGL</item>
@@ -34,6 +34,10 @@
         <item>Starbucks,SBUX</item>
         <item>Airbnb,ABNB</item>
         <item>Goldman Sachs,GS</item>
+        <item>Toyota,TM</item>
+        <item>Adobe,ADBE</item>
+        <item>Exxon Mobil,XOM</item>
+        <item>eBay,EBAY</item>
     </string-array>
 
 </resources>
