@@ -25,11 +25,11 @@
         android:id="@+id/heartSave"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginLeft="164dp"
         android:layout_marginTop="4dp"
-        android:background="@drawable/save_btn_selector"
-        app:layout_constraintStart_toEndOf="@+id/stockName"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
+        android:background="@drawable/unsaved_btn_selector"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/stockName" />
 
     <TextView

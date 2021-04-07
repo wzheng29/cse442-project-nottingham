@@ -7,10 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -20,16 +23,34 @@ public class real_time extends AppCompatActivity {
     private Button backHome;
     TextView realTimePrice;
     ImageView currentPriceTrend;
+    private ImageButton saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
+        if(QuickAccessData.contains("Apple")) saveButton.setBackgroundResource(R.drawable.save_btn_selector);
 
         // Back Button implementation
         backHome = (Button)findViewById(R.id.backHome);
         backHome.setBackgroundColor(Color.WHITE);
         backHome.setOnClickListener(v -> openHome());
+
+        // Save Button Implementation
+        saveButton = (ImageButton)findViewById(R.id.heartSave);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(QuickAccessData.contains("Apple")){
+                    QuickAccessData.remove("Apple");
+                    saveButton.setBackgroundResource(R.drawable.unsaved_btn_selector);
+                }
+                else{
+                    QuickAccessData.insert("Apple", "AAPL");
+                    saveButton.setBackgroundResource(R.drawable.save_btn_selector);
+                }
+            }
+        });
 
         // Display Stock price
         realTimePrice = (TextView) findViewById(R.id.realTimePrice);
@@ -52,13 +73,25 @@ public class real_time extends AppCompatActivity {
         Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
         currentPriceTrend.setImageBitmap(bMapScaled);
 
+    }
 
+    public void saveStock(){
+        if(QuickAccessData.contains("Apple")){
+            QuickAccessData.remove("Apple");
+            Toast.makeText(getApplicationContext(), "Apple removed from QuickAccess", Toast.LENGTH_LONG).show();
+        }
+        else{
+            QuickAccessData.insert("Apple", "AAPL");
+            Toast.makeText(getApplicationContext(), "Apple added to QuickAccess", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void openHome(){
             Intent intent  = new Intent(this, MainActivity.class);
             startActivity(intent);
     }
+
+
 
     // Get the price from API and show it from the TextView "realTimePrice"
     public void showPrice(){
