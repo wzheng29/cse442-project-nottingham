@@ -22,6 +22,7 @@ import com.chaquo.python.android.AndroidPlatform;
 public class real_time extends AppCompatActivity {
     private Button backHome;
     TextView realTimePrice;
+    TextView stockName;
     ImageView currentPriceTrend;
     private ImageButton saveButton;
 
@@ -30,6 +31,15 @@ public class real_time extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
         if(QuickAccessData.contains("Apple")) saveButton.setBackgroundResource(R.drawable.save_btn_selector);
+
+        //Get stock name and symbol
+        Bundle bundle = getIntent().getExtras();
+        String name = bundle.getString("name");
+        String symbol = bundle.getString("symbol");
+
+        //Set page name
+        stockName = (TextView)findViewById(R.id.stockName);
+        stockName.setText(name);
 
         // Back Button implementation
         backHome = (Button)findViewById(R.id.backHome);
@@ -60,14 +70,14 @@ public class real_time extends AppCompatActivity {
         }
         Python python = Python.getInstance();
         PyObject pythonFile = python.getModule("RealTimePython");
-        PyObject helloWorldString = pythonFile.callAttr("getPrice","AAPL");
+        PyObject helloWorldString = pythonFile.callAttr("getPrice",symbol);
         realTimePrice.setText(helloWorldString.toString());
 
 
 
         // Display Stock Trend
         currentPriceTrend = (ImageView) findViewById(R.id.currentPriceTrend);
-       PyObject frame = pythonFile.callAttr("Plotter","AAPL","2021-02-20");
+       PyObject frame = pythonFile.callAttr("Plotter",symbol,"2021-02-20");
         byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
         Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
         Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
