@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.chaquo.python.android.AndroidPlatform;
 
 public class real_time extends AppCompatActivity {
     private Button backHome;
+    private  Button openFuture;
     TextView realTimePrice;
     ImageView currentPriceTrend;
 
@@ -30,6 +30,11 @@ public class real_time extends AppCompatActivity {
         backHome = (Button)findViewById(R.id.backHome);
         backHome.setBackgroundColor(Color.WHITE);
         backHome.setOnClickListener(v -> openHome());
+
+        // Go to the future trend page implementation
+        openFuture = (Button)findViewById(R.id.openFuture);
+        openFuture.setBackgroundColor(Color.WHITE);
+        openFuture.setOnClickListener(v -> openFuture());
 
         // Display Stock price
         realTimePrice = (TextView) findViewById(R.id.realTimePrice);
@@ -59,17 +64,9 @@ public class real_time extends AppCompatActivity {
             Intent intent  = new Intent(this, MainActivity.class);
             startActivity(intent);
     }
-
-    // Get the price from API and show it from the TextView "realTimePrice"
-    public void showPrice(){
-        String price = "$0.0";
-        realTimePrice.setText(price);
-
-    }
-
-    //Get the price list from API and return it as a image to the real page
-    public void insertTrend() {
-
+    public void openFuture(){
+        Intent intent  = new Intent(this, future_price.class);
+        startActivity(intent);
     }
 
 
