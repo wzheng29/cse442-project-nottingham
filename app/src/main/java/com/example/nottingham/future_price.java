@@ -76,9 +76,6 @@ public class future_price extends AppCompatActivity {
         backReal = (Button)findViewById(R.id.backReal);
         backReal.setBackgroundColor(Color.WHITE);
         backReal.setOnClickListener(v -> openReal());
-
-
-        
     }
     public void openHome2(){
         Intent intent  = new Intent(this, MainActivity.class);

@@ -25,10 +25,6 @@ def stationarityTest(timeseries):
     rolling_mean = timeseries.rolling(window=20).mean()
     rolling_std = timeseries.rolling(window=20).std()
     
-    
-
-    
-    #Augmented Dickey–Fuller test:
     result = adfuller(timeseries)
     
 
