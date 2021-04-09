@@ -76,11 +76,10 @@
         android:background="@color/white"
         android:textColor="@color/black"/>
 
-    <Button
-        android:id="@+id/apple"
-        android:layout_width="wrap_content"
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Apple"
-        android:textColor="#131313" />
+        android:id="@+id/searchList"/>
+
 
 </RelativeLayout>

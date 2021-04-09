@@ -1,15 +1,16 @@
 package com.example.nottingham;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -19,12 +20,22 @@ public class real_time extends AppCompatActivity {
     private Button backHome;
     private  Button openFuture;
     TextView realTimePrice;
+    TextView stockName;
     ImageView currentPriceTrend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
+
+        //Get stock name and symbol
+        Bundle bundle = getIntent().getExtras();
+        String name = bundle.getString("name");
+        String symbol = bundle.getString("symbol");
+
+        //Set page name
+        stockName = (TextView)findViewById(R.id.stockName);
+        stockName.setText(name);
 
         // Back Button implementation
         backHome = (Button)findViewById(R.id.backHome);
@@ -44,14 +55,14 @@ public class real_time extends AppCompatActivity {
         }
         Python python = Python.getInstance();
         PyObject pythonFile = python.getModule("RealTimePython");
-        PyObject helloWorldString = pythonFile.callAttr("getPrice","AAPL");
+        PyObject helloWorldString = pythonFile.callAttr("getPrice",symbol);
         realTimePrice.setText("$"+helloWorldString.toString());
 
 
 
         // Display Stock Trend
         currentPriceTrend = (ImageView) findViewById(R.id.currentPriceTrend);
-       PyObject frame = pythonFile.callAttr("Plotter","AAPL","2021-02-20");
+       PyObject frame = pythonFile.callAttr("Plotter",symbol,"2021-02-20");
         byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
         Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
         Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
