@@ -1,7 +1,5 @@
 package com.example.nottingham;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +8,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -45,7 +45,7 @@ public class real_time extends AppCompatActivity {
         Python python = Python.getInstance();
         PyObject pythonFile = python.getModule("RealTimePython");
         PyObject helloWorldString = pythonFile.callAttr("getPrice","AAPL");
-        realTimePrice.setText(helloWorldString.toString());
+        realTimePrice.setText("$"+helloWorldString.toString());
 
 
 
