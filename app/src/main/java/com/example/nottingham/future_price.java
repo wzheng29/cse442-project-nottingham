@@ -41,6 +41,7 @@ public class future_price extends AppCompatActivity {
         }
         Python python = Python.getInstance();
         PyObject pythonFile = python.getModule("futureTrend");
+        //date picker log here
         picker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
@@ -65,7 +66,6 @@ public class future_price extends AppCompatActivity {
                 futurePriceTrend.setImageBitmap(bMapScaled);
             }
         });
-
 
         // Back Button implementation
         backHome2 = (Button)findViewById(R.id.backHome2);
