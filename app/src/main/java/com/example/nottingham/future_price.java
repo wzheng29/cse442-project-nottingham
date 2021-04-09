@@ -25,12 +25,22 @@ public class future_price extends AppCompatActivity {
     ImageView futurePriceTrend;
     private NumberPicker picker1;
     private String[] pickerVals;
-
+    TextView stockName2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_future_price);
+
+        //Get stock name and symbol
+        Bundle bundle = getIntent().getExtras();
+        String name = bundle.getString("name");
+        String symbol = bundle.getString("symbol");
+
+        //set stock name
+        stockName2 = (TextView)findViewById(R.id.stockName2);
+        stockName2.setText(name);
+
         pickerVals = new String[] {"1", "2", "3", "4", "5"};
         picker1 = findViewById(R.id.numberPicker_main);
         picker1.setMaxValue(4);
@@ -51,7 +61,7 @@ public class future_price extends AppCompatActivity {
                 futureTimePrice = (TextView) findViewById(R.id.futureTimePrice);
                 //Using chaquopy and script
                 //APPLE HAS BEEN HARDCODED HERE
-                PyObject helloWorldString = pythonFile.callAttr("predict","AAPL","2010-02-20",valuePicker1);
+                PyObject helloWorldString = pythonFile.callAttr("predict",symbol,"2010-02-20",valuePicker1);
                 futureTimePrice.setText("$"+helloWorldString.toString());
 
 
@@ -59,7 +69,7 @@ public class future_price extends AppCompatActivity {
 
                 futurePriceTrend = (ImageView) findViewById(R.id.futurePriceTrend);
                 //APPLE HAS BEEN HARDCODED HERE
-                PyObject frame = pythonFile.callAttr("futurePlot","AAPL","2010-02-20",valuePicker1);
+                PyObject frame = pythonFile.callAttr("futurePlot",symbol,"2010-02-20",valuePicker1);
                 byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
                 Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);

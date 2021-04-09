@@ -45,7 +45,7 @@ public class real_time extends AppCompatActivity {
         // Go to the future trend page implementation
         openFuture = (Button)findViewById(R.id.openFuture);
         openFuture.setBackgroundColor(Color.WHITE);
-        openFuture.setOnClickListener(v -> openFuture());
+        openFuture.setOnClickListener(v -> openFuture(name, symbol));
 
         // Display Stock price
         realTimePrice = (TextView) findViewById(R.id.realTimePrice);
@@ -75,10 +75,14 @@ public class real_time extends AppCompatActivity {
             Intent intent  = new Intent(this, MainActivity.class);
             startActivity(intent);
     }
-    public void openFuture(){
+    public void openFuture(String stock_name, String stock_symbol){
         Intent intent  = new Intent(this, future_price.class);
+        intent.putExtra("name",stock_name);
+        intent.putExtra("symbol",stock_symbol);
         startActivity(intent);
     }
+
+
 
 
 }
