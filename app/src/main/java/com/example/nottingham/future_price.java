@@ -63,7 +63,7 @@ public class future_price extends AppCompatActivity {
                 //APPLE HAS BEEN HARDCODED HERE
 
                     // do something long
-                    Runnable runnable = new Runnable() {
+                Thread runnable = new Thread() {
                         @Override
                         public void run() {
 
@@ -75,11 +75,15 @@ public class future_price extends AppCompatActivity {
                                     public void run() {
                                         futureTimePrice.setText("$"+helloWorldString.toString());
                                     }
-                                });
+                                }
+
+                                );
 
                         }
                     };
-                    new Thread(runnable).start();
+                    (runnable).start();
+                    runnable.interrupt();
+
 
 
 
@@ -88,7 +92,7 @@ public class future_price extends AppCompatActivity {
 
                 futurePriceTrend = (ImageView) findViewById(R.id.futurePriceTrend);
                 //APPLE HAS BEEN HARDCODED HERE
-                Runnable runnablePLot = new Runnable() {
+                Thread runnablePLot = new Thread() {
                     @Override
                     public void run() {
 
@@ -107,7 +111,8 @@ public class future_price extends AppCompatActivity {
 
                     }
                 };
-                new Thread(runnablePLot).start();
+                (runnablePLot).start();
+                runnablePLot.interrupt();
 
 
             }
