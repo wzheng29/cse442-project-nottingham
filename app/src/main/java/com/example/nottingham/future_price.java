@@ -61,19 +61,55 @@ public class future_price extends AppCompatActivity {
                 futureTimePrice = (TextView) findViewById(R.id.futureTimePrice);
                 //Using chaquopy and script
                 //APPLE HAS BEEN HARDCODED HERE
-                PyObject helloWorldString = pythonFile.callAttr("predict",symbol,"2011-02-20",valuePicker1);
-                futureTimePrice.setText("$"+helloWorldString.toString());
+
+                    // do something long
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+
+                            PyObject helloWorldString = pythonFile.callAttr("predict",symbol,"2011-02-20",valuePicker1);
+
+
+                                futureTimePrice.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        futureTimePrice.setText("$"+helloWorldString.toString());
+                                    }
+                                });
+
+                        }
+                    };
+                    new Thread(runnable).start();
+
+
 
 
                 // Display Stock Trend
 
                 futurePriceTrend = (ImageView) findViewById(R.id.futurePriceTrend);
                 //APPLE HAS BEEN HARDCODED HERE
-                PyObject frame = pythonFile.callAttr("futurePlot",symbol,"2011-02-20",valuePicker1);
-                byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
-                Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
-                futurePriceTrend.setImageBitmap(bMapScaled);
+                Runnable runnablePLot = new Runnable() {
+                    @Override
+                    public void run() {
+
+                        PyObject frame = pythonFile.callAttr("futurePlot",symbol,"2011-02-20",valuePicker1);
+
+
+                        futurePriceTrend.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
+                                Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
+                                futurePriceTrend.setImageBitmap(bMapScaled);
+                            }
+                        });
+
+                    }
+                };
+                new Thread(runnablePLot).start();
+
+
             }
         });
 
