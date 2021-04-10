@@ -41,9 +41,9 @@ public class future_price extends AppCompatActivity {
         stockName2 = (TextView)findViewById(R.id.stockName2);
         stockName2.setText(name);
 
-        pickerVals = new String[] {"1", "2", "3", "4", "5"};
+        pickerVals = new String[] {"0", "1", "2", "3", "4","5"};
         picker1 = findViewById(R.id.numberPicker_main);
-        picker1.setMaxValue(4);
+        picker1.setMaxValue(5);
         picker1.setMinValue(0);
         picker1.setDisplayedValues(pickerVals);
         if (!Python.isStarted()) {
