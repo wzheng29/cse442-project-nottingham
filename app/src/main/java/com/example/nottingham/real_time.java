@@ -30,12 +30,14 @@ public class real_time extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
-        if(QuickAccessData.contains("Apple")) saveButton.setBackgroundResource(R.drawable.save_btn_selector);
+
 
         //Get stock name and symbol
         Bundle bundle = getIntent().getExtras();
         String name = bundle.getString("name");
         String symbol = bundle.getString("symbol");
+
+
 
         //Set page name
         stockName = (TextView)findViewById(R.id.stockName);
@@ -48,19 +50,9 @@ public class real_time extends AppCompatActivity {
 
         // Save Button Implementation
         saveButton = (ImageButton)findViewById(R.id.heartSave);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(QuickAccessData.contains("Apple")){
-                    QuickAccessData.remove("Apple");
-                    saveButton.setBackgroundResource(R.drawable.unsaved_btn_selector);
-                }
-                else{
-                    QuickAccessData.insert("Apple", "AAPL");
-                    saveButton.setBackgroundResource(R.drawable.save_btn_selector);
-                }
-            }
-        });
+        saveButton.setOnClickListener(v -> saveStock(name, symbol));
+        //pre set state of save button
+        if(QuickAccessData.contains(name)) saveButton.setBackgroundResource(R.drawable.save_btn_selector);
 
         // Display Stock price
         realTimePrice = (TextView) findViewById(R.id.realTimePrice);
@@ -84,15 +76,15 @@ public class real_time extends AppCompatActivity {
         currentPriceTrend.setImageBitmap(bMapScaled);
 
     }
-
-    public void saveStock(){
-        if(QuickAccessData.contains("Apple")){
-            QuickAccessData.remove("Apple");
-            Toast.makeText(getApplicationContext(), "Apple removed from QuickAccess", Toast.LENGTH_LONG).show();
+    //Acts when Heart is clicked, adds or removes to quick access data
+    public void saveStock(String stockName, String stockSymbol){
+        if(QuickAccessData.contains(stockName)){
+            QuickAccessData.remove(stockName);
+            saveButton.setBackgroundResource(R.drawable.unsaved_btn_selector);
         }
         else{
-            QuickAccessData.insert("Apple", "AAPL");
-            Toast.makeText(getApplicationContext(), "Apple added to QuickAccess", Toast.LENGTH_SHORT).show();
+            QuickAccessData.insert(stockName, stockSymbol);
+            saveButton.setBackgroundResource(R.drawable.save_btn_selector);
         }
     }
 

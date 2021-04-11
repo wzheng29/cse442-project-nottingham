@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         return names;
     }
 
-    //Find symbol for the given stock name (Apple -> AAPLE)
+    //Find symbol for the given stock name (Apple -> AAPL)
     private String getSymbol (String stockName){
         for (String s : stock_list) {
             String[] separated = s.split(",");
