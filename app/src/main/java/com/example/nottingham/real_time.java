@@ -107,13 +107,9 @@ public class real_time extends AppCompatActivity {
 
 
     // Get the price from API and show it from the TextView "realTimePrice"
-    public void showPrice(){
-        String price = "$0.0";
-        realTimePrice.setText(price);
+
 
     }
-
-
 
 
 }
