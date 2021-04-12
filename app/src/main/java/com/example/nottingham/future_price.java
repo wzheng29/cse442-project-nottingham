@@ -126,15 +126,17 @@ public class future_price extends AppCompatActivity {
         // Back to Real time page implementation
         backReal = (Button)findViewById(R.id.backReal);
         backReal.setBackgroundColor(Color.WHITE);
-        backReal.setOnClickListener(v -> openReal());
+        backReal.setOnClickListener(v -> openReal(name, symbol));
     }
     public void openHome2(){
         Intent intent  = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void openReal(){
+    public void openReal(String stock_name, String stock_symbol){
         Intent intent  = new Intent(this, real_time.class);
+        intent.putExtra("name",stock_name);
+        intent.putExtra("symbol",stock_symbol);
         startActivity(intent);
     }
 }
