@@ -7,4 +7,37 @@
     <string name="Russel2000_ticker">RUT +0.00%</string>
     <string name="action_settings">Settings</string>
 
+    <string-array name="all_stocks">
+        <item>Apple,AAPL</item>
+        <item>Microsoft,MSFT</item>
+        <item>Amazon,AMZN</item>
+        <item>Google,GOOGL</item>
+        <item>Facebook,FB</item>
+        <item>Alibaba,BABA</item>
+        <item>Tesla,TSLA</item>
+        <item>JP Morgan,JPM</item>
+        <item>Visa,V</item>
+        <item>Walmart,WMT</item>
+        <item>Walt Disney,DIS</item>
+        <item>PayPal,PYPL</item>
+        <item>Verizon,VZ</item>
+        <item>Netflix,NFLX</item>
+        <item>Coca Cola,KO</item>
+        <item>Nike,NKE</item>
+        <item>Oracle,ORCL</item>
+        <item>Pfizer,PFE</item>
+        <item>Pepsi,PEP</item>
+        <item>McDonald\'s,MCD</item>
+        <item>T-Mobile,TMUS</item>
+        <item>Costco,COST</item>
+        <item>Sony,SONY</item>
+        <item>Starbucks,SBUX</item>
+        <item>Airbnb,ABNB</item>
+        <item>Goldman Sachs,GS</item>
+        <item>Toyota,TM</item>
+        <item>Adobe,ADBE</item>
+        <item>Exxon Mobil,XOM</item>
+        <item>eBay,EBAY</item>
+    </string-array>
+
 </resources>
