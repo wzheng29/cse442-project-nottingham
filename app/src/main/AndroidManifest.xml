@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nottingham">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -10,7 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nottingham">
-        <activity android:name=".real_time"></activity>
+        <activity android:name=".future_price"
+            android:label="Future Page"
+            >
+        </activity>
+        <activity android:name=".real_time"
+            android:label="Real-Time Page">
+        </activity>
         <activity android:name=".quick_access"
             android:label="Quick Access">
         </activity>

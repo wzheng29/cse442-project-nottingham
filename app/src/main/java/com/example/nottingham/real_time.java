@@ -21,6 +21,7 @@ import com.chaquo.python.android.AndroidPlatform;
 
 public class real_time extends AppCompatActivity {
     private Button backHome;
+    private  Button openFuture;
     TextView realTimePrice;
     TextView stockName;
     ImageView currentPriceTrend;
@@ -48,6 +49,11 @@ public class real_time extends AppCompatActivity {
         backHome.setBackgroundColor(Color.WHITE);
         backHome.setOnClickListener(v -> openHome());
 
+        // Go to the future trend page implementation
+        openFuture = (Button)findViewById(R.id.openFuture);
+        openFuture.setBackgroundColor(Color.WHITE);
+        openFuture.setOnClickListener(v -> openFuture(name, symbol));
+
         // Save Button Implementation
         saveButton = (ImageButton)findViewById(R.id.heartSave);
         saveButton.setOnClickListener(v -> saveStock(name, symbol));
@@ -63,7 +69,7 @@ public class real_time extends AppCompatActivity {
         Python python = Python.getInstance();
         PyObject pythonFile = python.getModule("RealTimePython");
         PyObject helloWorldString = pythonFile.callAttr("getPrice",symbol);
-        realTimePrice.setText(helloWorldString.toString());
+        realTimePrice.setText("$"+helloWorldString.toString());
 
 
 
@@ -92,6 +98,11 @@ public class real_time extends AppCompatActivity {
             Intent intent  = new Intent(this, MainActivity.class);
             startActivity(intent);
     }
+    public void openFuture(String stock_name, String stock_symbol){
+        Intent intent  = new Intent(this, future_price.class);
+        intent.putExtra("name",stock_name);
+        intent.putExtra("symbol",stock_symbol);
+        startActivity(intent);
 
 
 
@@ -102,10 +113,7 @@ public class real_time extends AppCompatActivity {
 
     }
 
-    //Get the price list from API and return it as a image to the real page
-    public void insertTrend() {
 
-    }
 
 
 }
