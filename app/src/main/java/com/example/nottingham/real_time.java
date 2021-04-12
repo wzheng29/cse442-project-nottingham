@@ -109,7 +109,7 @@ public class real_time extends AppCompatActivity {
     // Get the price from API and show it from the TextView "realTimePrice"
 
 
-
+    }
 
 
 }
