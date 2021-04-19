@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Button quick_access;
     private ArrayAdapter<String> arrayAdapter;
     private ListView searchList;
-    private String[] stock_list;
+    private static String[] stock_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,19 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
         quick_access = (Button)findViewById(R.id.button);
         quick_access.setBackgroundColor(Color.WHITE);
-        quick_access.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                openQuickAccess();
-            }
-        });
+        quick_access.setOnClickListener(v -> openQuickAccess());
 
-        searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String name = arrayAdapter.getItem(position);
-                openRealTime(name,getSymbol(name));
-            }
+        searchList.setOnItemClickListener((parent, view, position, id) -> {
+            String name = arrayAdapter.getItem(position);
+            openRealTime(name,getSymbol(name));
         });
     }
 
@@ -175,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String[] getStockNames(){
+    //Get name of all stocks from list in values/strings.xml
+    public String[] getStockNames(){
         String[] names = new String[stock_list.length];
         for(int i = 0; i < stock_list.length; i++){
             String[] separated = stock_list[i].split(",");
@@ -185,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Find symbol for the given stock name (Apple -> AAPL)
-    private String getSymbol (String stockName){
+    public static String getSymbol (String stockName){
         for (String s : stock_list) {
             String[] separated = s.split(",");
             if (separated[0].equals(stockName)) {

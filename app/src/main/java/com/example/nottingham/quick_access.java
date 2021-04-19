@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -107,7 +108,10 @@ public class quick_access extends AppCompatActivity {
         //Filter search list
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stock_names);
         searchList.setAdapter(arrayAdapter);
-
+        searchList.setOnItemClickListener((parent, view, position, id) -> {
+            String name = arrayAdapter.getItem(position);
+            openRealTime(name,MainActivity.getSymbol(name));
+        });
     }
     public void setColor(TextView tv, String s){
         if(s.contains("+")){
