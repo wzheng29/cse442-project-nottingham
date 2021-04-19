@@ -67,7 +67,7 @@ public class quick_access extends AppCompatActivity {
         Python python = Python.getInstance();
         PyObject pythonFile = python.getModule("stockGetter");
 
-        //itterate through HashMap and add name & percent change to vertical layout via horizontal layout
+        //iterate through HashMap and add name & percent change to vertical layout via horizontal layout
         for(String name : savedStocks.keySet()){
             LinearLayout hl = new LinearLayout(this);
             hl.setOrientation(LinearLayout.HORIZONTAL);
@@ -89,6 +89,8 @@ public class quick_access extends AppCompatActivity {
             buttName.setBackgroundColor(Color.parseColor("#333333"));
             buttName.setPadding(0,0,50, 0);
 
+            stock_names.add(name);
+
             //Initialize button to unsave
             buttHeart = new ImageButton(this);
             buttHeart.setBackgroundResource(R.drawable.save_btn_selector);
@@ -100,7 +102,6 @@ public class quick_access extends AppCompatActivity {
             hl.addView(tvChange);
             vl.addView(hl);
 
-            stock_names.add(name);
         }
 
         //Filter search list
@@ -130,7 +131,7 @@ public class quick_access extends AppCompatActivity {
         vl.removeViewInLayout(v);
         vl.setGravity(Gravity.TOP);
         QuickAccessData.remove(name);
-        stock_names.remove(name);
+        arrayAdapter.remove(name);
     }
     public void returnHome(){
         Intent intent  = new Intent(this, MainActivity.class);
@@ -155,7 +156,6 @@ public class quick_access extends AppCompatActivity {
             public boolean onMenuItemActionExpand(MenuItem item) {
                 searchList.setVisibility(View.VISIBLE);
                 backHome.setVisibility(View.GONE);
-                searchList.bringToFront();
                 return true;
             }
 
