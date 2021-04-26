@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nottingham">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,34 +12,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nottingham">
-        <activity android:name=".future_price"
-            android:label="Future Page"
-            >
-        </activity>
-        <activity android:name=".real_time"
-            android:label="Real-Time Page">
-        </activity>
-        <activity android:name=".quick_access"
-            android:label="Quick Access">
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".future_price"
+            android:label="Future Page" />
+        <activity
+            android:name=".real_time"
+            android:label="Real-Time Page" />
+        <activity
+            android:name=".quick_access"
+            android:label="Quick Access" />
+        <activity android:name=".login">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
+
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".searchActivity" />
         </activity>
-
         <activity android:name=".searchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
+
+            <meta-data
+                android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
     </application>
