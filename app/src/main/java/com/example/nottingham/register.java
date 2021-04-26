@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class login extends AppCompatActivity {
+public class register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,14 +16,9 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button home;
-        home = (Button)findViewById(R.id.home_button);
+        home = (Button)findViewById(R.id.signup_home_button);
         home.setBackgroundColor(Color.WHITE);
         home.setOnClickListener(v -> openHome());
-
-        Button signup;
-        signup = (Button)findViewById(R.id.register_button);
-        signup.setBackgroundColor(Color.WHITE);
-        signup.setOnClickListener(v -> openSignUp());
 
     }
     public void openHome(){
@@ -31,8 +26,4 @@ public class login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openSignUp(){
-        Intent intent  = new Intent(this, register.class);
-        startActivity(intent);
-    }
 }
