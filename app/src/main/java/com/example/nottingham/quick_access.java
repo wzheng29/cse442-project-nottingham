@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -27,6 +28,7 @@ public class quick_access extends AppCompatActivity {
     ImageButton buttHeart;
     LinearLayout vl;
     Button backHome;
+    LinearLayout divider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +56,14 @@ public class quick_access extends AppCompatActivity {
             hl.setOrientation(LinearLayout.HORIZONTAL);
 
 
-
+            LinearLayout vl_mini = new LinearLayout((this));
+            vl_mini.setOrientation(LinearLayout.VERTICAL);
 
             //PyObject stockPrice = pythonFile.callAttr("getPrice", savedStocks.get(name));
             PyObject stockChange = pythonFile.callAttr("getChange",savedStocks.get(name));
             //Initialize text View holding % change
             tvChange = new TextView(this);
-            tvChange.setText(stockChange.toString());
+            tvChange.setText(stockChange.toString() +"%");
             setColor(tvChange, stockChange.toString());
             tvChange.setTextSize(25);
 
@@ -70,19 +73,33 @@ public class quick_access extends AppCompatActivity {
             buttName.setTextSize(25);
             buttName.setText(name);
             buttName.setTextColor(Color.WHITE);
+            buttName.setGravity(Gravity.LEFT);
             buttName.setBackgroundColor(Color.parseColor("#333333"));
             buttName.setPadding(0,0,50, 0);
+            LinearLayout.LayoutParams buttParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            buttParams.weight = 1;
+            //buttParams.gravity = Gravity.LEFT;
+            buttName.setLayoutParams(buttParams);
 
             //Initialize button to unsave
             buttHeart = new ImageButton(this);
             buttHeart.setBackgroundResource(R.drawable.save_btn_selector);
-            buttHeart.setOnClickListener(v -> removeQuickAccess(hl, name));
-            buttHeart.setLayoutParams(new LinearLayout.LayoutParams(118,118));
+            buttHeart.setOnClickListener(v -> removeQuickAccess(vl_mini, name));
+            buttHeart.setLayoutParams(new LinearLayout.LayoutParams(115,115));
+
+            divider = new LinearLayout(this);
+            divider.setBackgroundColor(Color.WHITE);
+            LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(750, 8);
+            dividerParams.gravity = Gravity.CENTER;
+            divider.setLayoutParams(dividerParams);
+
 
             hl.addView(buttHeart);
             hl.addView(buttName);
             hl.addView(tvChange);
-            vl.addView(hl);
+            vl_mini.addView(hl);
+            vl_mini.addView(divider);
+            vl.addView(vl_mini);
         }
 
     }
