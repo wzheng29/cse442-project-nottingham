@@ -33,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //READ FROM DB
-    public HashMap<String,String> getData (int id){
+    public HashMap<String,String> getData (){
         SQLiteDatabase db = this.getReadableDatabase();
         HashMap<String,String> data = new HashMap<>();
         String [] columns = {UID,USERNAME,PASSWORD};
@@ -48,20 +48,34 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //ADD USER - returns new row number; -1 if there is an error
-    public long addData(String username, String password){
+    public long addUser(String username, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(USERNAME,username);
         contentValues.put(PASSWORD,password);
-        long id = db.insert(TABLE_NAME, null, contentValues);
-        return id;
+        return db.insert(TABLE_NAME, null, contentValues);
     }
 
     //DELETE USER - return number of rows removed
     public int deleteUser(String username){
         SQLiteDatabase db = this.getWritableDatabase();
         String[] args = {username};
-        int num = db.delete(TABLE_NAME,USERNAME+" LIKE ?",args);
-        return num;
+        return db.delete(TABLE_NAME,USERNAME+" LIKE ?",args);
+    }
+
+    //PRINT DB TABLE - return string with all user info
+    public String showData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        StringBuffer buffer = new StringBuffer();
+        String [] columns = {UID,USERNAME,PASSWORD};
+        Cursor cursor = db.query(TABLE_NAME, columns, null, null, null, null, null);
+        while(cursor.moveToNext()){
+            int cid = cursor.getInt(cursor.getColumnIndexOrThrow(UID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(USERNAME));
+            String pw = cursor.getString(cursor.getColumnIndexOrThrow(PASSWORD));
+            buffer.append(cid + " " + name + " " + pw + "\n");
+        }
+        cursor.close();
+        return buffer.toString();
     }
 }
