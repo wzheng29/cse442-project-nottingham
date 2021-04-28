@@ -18,7 +18,7 @@ public class register extends AppCompatActivity {
 
     private EditText firstName, lastName, username, password, repassword;
     DBHelper dbHelper;
-    private HashMap<String,String> dataTable;
+    //private HashMap<String,String> dataTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,7 @@ public class register extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
 
-        Button view_data, signup;
-        view_data = (Button)findViewById(R.id.view_data);
-        view_data.setBackgroundColor(Color.WHITE);
+        Button signup;
 
         signup = (Button)findViewById(R.id.signup_register_button);
         signup.setBackgroundColor(Color.WHITE);
@@ -41,8 +39,12 @@ public class register extends AppCompatActivity {
         repassword = (EditText)findViewById(R.id.repassword_signup);
 
         signup.setOnClickListener(v -> add());
-        view_data.setOnClickListener(v -> showToast(dbHelper.showData()));
 
+    }
+
+    private void openLogin(){
+        Intent intent = new Intent(this,login.class);
+        startActivity(intent);
     }
 
     //add user
@@ -50,14 +52,21 @@ public class register extends AppCompatActivity {
         String uname = username.getText().toString();
         String pw1 = password.getText().toString();
         String pw2 = repassword.getText().toString();
-
-        //check if user exists and if passwords match
-        if(validUser(uname) && validPassword(pw1,pw2)){
-            long id = dbHelper.addUser(uname,pw1);
-            if(id < 0){
-                showToast("INSERTION FAILED");
-            }else{
-                showToast("INSERTION DONE");
+        if(uname.length() == 0 || pw1.length() == 0 || pw2.length() == 0){
+            showToast("EMPTY FIELDS");
+        }
+        else{
+            //check if user exists and if passwords match
+            if(dbHelper.validUser(uname) && validPassword(pw1,pw2)){
+                long id = dbHelper.addUser(uname,pw1);
+                if(id < 0){
+                    showToast("INSERTION FAILED");
+                }else{
+                    showToast("INSERTION DONE");
+                    openLogin();
+                }
+            }else if(!dbHelper.validUser(uname)){
+                showToast("USERNAME TAKEN");
             }
         }
     }
@@ -78,19 +87,6 @@ public class register extends AppCompatActivity {
         }
         showToast("PASSWORDS DID NOT MATCH");
         return false;
-    }
-
-    //Check if the username is already exist
-    private boolean validUser(String uname){
-        dataTable = dbHelper.getData();
-        for(String key : dataTable.keySet()){
-            if(key.equals(uname)){
-                showToast("USERNAME TAKEN");
-                return false;
-            }
-        }
-        showToast("VALID USERNAME");
-        return true;
     }
 
 }

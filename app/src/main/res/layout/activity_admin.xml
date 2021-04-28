@@ -4,44 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login">
+    tools:context=".admin">
 
     <EditText
-        android:id="@+id/username_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/delete_user"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:ems="10"
+        android:layout_marginTop="100dp"
         android:hint="Enter Username"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/password_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
         android:ems="10"
-        android:hint="Enter Password"
-        android:inputType="textPassword" />
+        android:inputType="text"/>
 
     <Button
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:id="@+id/login_button"
-        android:layout_marginTop="290dp"
+        android:id="@+id/delete_button"
+        android:layout_marginTop="140dp"
         android:layout_centerHorizontal="true"
-        android:text="Login"
+        android:text="DELETE USER"
         android:textColor="@color/black"/>
 
     <Button
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:id="@+id/register_button"
-        android:layout_marginTop="330dp"
+        android:id="@+id/view_data_button"
+        android:layout_marginTop="240dp"
         android:layout_centerHorizontal="true"
-        android:text="Sign Up"
+        android:text="VIEW DATABASE"
         android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/dbDisplay"
+        android:layout_marginTop="300dp"
+        android:textColor="@color/black"
+        android:gravity="center"/>
 
 </RelativeLayout>

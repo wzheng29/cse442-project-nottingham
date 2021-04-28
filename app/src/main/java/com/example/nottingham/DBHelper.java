@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -77,5 +78,15 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return buffer.toString();
+    }
+
+    public boolean validUser(String uname){
+        HashMap<String, String> dataTable = getData();
+        for(String key : dataTable.keySet()){
+            if(key.equals(uname)){
+                return false;
+            }
+        }
+        return true;
     }
 }

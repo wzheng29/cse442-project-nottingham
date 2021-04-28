@@ -29,11 +29,7 @@ public class login extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password_input);
         dbHelper = new DBHelper(this);
 
-        Button view_data, signup, signin;
-
-        view_data = (Button)findViewById(R.id.view_data_button);
-        view_data.setBackgroundColor(Color.WHITE);
-        view_data.setOnClickListener(v -> showToast(dbHelper.showData()));
+        Button signup, signin;
 
         signup = (Button)findViewById(R.id.register_button);
         signup.setBackgroundColor(Color.WHITE);
@@ -46,11 +42,17 @@ public class login extends AppCompatActivity {
             String pw = password.getText().toString();
             dataTable = dbHelper.getData();
             String check = dataTable.get(uname);
-            if(check == null){
+
+            //Add admin if it doesn't already exist
+            if(uname.equals("Admin") && dbHelper.validUser("Admin")){
+                dbHelper.addUser("Admin","1234");
+                openAdmin();
+            }else if(check == null){
                 showToast("USER DOES NOT EXISTS");
             }else if(check.equals(pw)){
                 showToast("VALID USER");
-                openHome();
+                if(uname.equals("Admin")){ openAdmin(); }
+                else{ openHome(); }
             }else{
                 showToast("WRONG PASSWORD");
             }
@@ -66,6 +68,12 @@ public class login extends AppCompatActivity {
         Intent intent  = new Intent(this, register.class);
         startActivity(intent);
     }
+
+    private void openAdmin(){
+        Intent intent = new Intent(this,admin.class);
+        startActivity(intent);
+    }
+
     private void showToast(String message){
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;

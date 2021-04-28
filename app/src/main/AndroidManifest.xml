@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nottingham">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".register"/>
+        <activity android:name=".admin"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".register" />
         <activity
             android:name=".future_price"
             android:label="Future Page" />
