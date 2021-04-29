@@ -22,6 +22,7 @@ import com.chaquo.python.android.AndroidPlatform;
 public class real_time extends AppCompatActivity {
     private Button backHome;
     private  Button openFuture;
+    private Button openPrevious;
     TextView realTimePrice;
     TextView stockName;
     ImageView currentPriceTrend;
