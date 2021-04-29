@@ -55,6 +55,11 @@ public class real_time extends AppCompatActivity {
         openFuture.setBackgroundColor(Color.WHITE);
         openFuture.setOnClickListener(v -> openFuture(name, symbol));
 
+        // Go to the  previous trend page implementation
+        openPrevious = (Button)findViewById(R.id.openPrevious);
+        openPrevious.setBackgroundColor(Color.WHITE);
+        openPrevious.setOnClickListener(v -> openPrevious(name, symbol));
+
         // Save Button Implementation
         saveButton = (ImageButton)findViewById(R.id.heartSave);
         saveButton.setOnClickListener(v -> saveStock(name, symbol));
@@ -109,6 +114,14 @@ public class real_time extends AppCompatActivity {
 
     // Get the price from API and show it from the TextView "realTimePrice"
 
+
+    }
+
+    public void openPrevious(String stock_name, String stock_symbol){
+        Intent intent  = new Intent(this, previous_trend.class);
+        intent.putExtra("name",stock_name);
+        intent.putExtra("symbol",stock_symbol);
+        startActivity(intent);
 
     }
 
