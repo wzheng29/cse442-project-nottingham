@@ -44,7 +44,7 @@ public class future_price extends AppCompatActivity {
         stockName2.setText(name);
 
         saveButton = findViewById(R.id.heartSave2);
-        //saveButton.setOnClickListener(v -> saveStock(name, symbol));
+        saveButton.setOnClickListener(v -> saveStock(name, symbol));
         if(QuickAccessData.contains(name)) saveButton.setBackgroundResource(R.drawable.save_btn_selector);
 
         pickerVals = new String[] {"0", "1", "2", "3", "4","5"};
@@ -144,5 +144,16 @@ public class future_price extends AppCompatActivity {
         intent.putExtra("name",stock_name);
         intent.putExtra("symbol",stock_symbol);
         startActivity(intent);
+    }
+    //Acts when Heart is clicked, adds or removes to quick access data
+    public void saveStock(String stockName, String stockSymbol){
+        if(QuickAccessData.contains(stockName)){
+            QuickAccessData.remove(stockName);
+            saveButton.setBackgroundResource(R.drawable.unsaved_btn_selector);
+        }
+        else{
+            QuickAccessData.insert(stockName, stockSymbol);
+            saveButton.setBackgroundResource(R.drawable.save_btn_selector);
+        }
     }
 }
