@@ -21,6 +21,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageButton
+        android:id="@+id/heartSave2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/unsaved_btn_selector"
+        app:layout_constraintBottom_toTopOf="@+id/stockName2"
+        app:layout_constraintStart_toStartOf="@+id/stockName2" />
+
     <TextView
         android:id="@+id/stockName2"
         android:layout_width="wrap_content"
