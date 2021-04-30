@@ -22,6 +22,7 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 
 public class previous_trend extends AppCompatActivity {
+
     private Button backHome3;
     private Button backReal2;
     ImageView previousTrend;

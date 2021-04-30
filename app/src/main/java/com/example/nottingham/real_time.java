@@ -39,8 +39,6 @@ public class real_time extends AppCompatActivity {
         String name = bundle.getString("name");
         String symbol = bundle.getString("symbol");
 
-
-
         //Set page name
         stockName = (TextView)findViewById(R.id.stockName);
         stockName.setText(name);
@@ -109,11 +107,6 @@ public class real_time extends AppCompatActivity {
         intent.putExtra("name",stock_name);
         intent.putExtra("symbol",stock_symbol);
         startActivity(intent);
-
-
-
-    // Get the price from API and show it from the TextView "realTimePrice"
-
 
     }
 
