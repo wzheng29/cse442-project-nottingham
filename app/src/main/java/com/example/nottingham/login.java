@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ public class login extends AppCompatActivity {
     private EditText username, password;
     DBHelper dbHelper;
     private HashMap<String,String> dataTable;
+    private CheckBox remember_me;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,9 @@ public class login extends AppCompatActivity {
 
         username = (EditText)findViewById(R.id.username_input);
         password = (EditText)findViewById(R.id.password_input);
+        remember_me = (CheckBox)findViewById(R.id.remember_me);
         dbHelper = new DBHelper(this);
+        sharedPreferences = getSharedPreferences("rem",MODE_PRIVATE);
 
         Button signup, signin;
 
@@ -52,11 +57,24 @@ public class login extends AppCompatActivity {
             }else if(check.equals(pw)){
                 showToast("VALID USER");
                 if(uname.equals("Admin")){ openAdmin(); }
-                else{ openHome(); }
+                else{
+                    if(remember_me.isChecked()){
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("uname",uname);
+                        editor.putString("password",pw);
+                        editor.putBoolean("remember_check",remember_me.isChecked());
+                        editor.apply();
+                    }else{
+                        sharedPreferences.edit().clear().apply();
+                    }
+                    openHome();
+                }
             }else{
                 showToast("WRONG PASSWORD");
             }
         });
+
+        getRemembered();
 
     }
     public void openHome(){
@@ -72,6 +90,22 @@ public class login extends AppCompatActivity {
     private void openAdmin(){
         Intent intent = new Intent(this,admin.class);
         startActivity(intent);
+    }
+
+    private void getRemembered(){
+        SharedPreferences sp = getSharedPreferences("rem",MODE_PRIVATE);
+        if(sp.contains("uname")){
+            String getUname = sp.getString("uname","N/A");
+            username.setText(getUname);
+        }
+        if(sp.contains("password")){
+            String getPw = sp.getString("password","N/A");
+            password.setText(getPw);
+        }
+        if(sp.contains("remember_check")){
+            boolean getChecked = sp.getBoolean("remember_check",false);
+            remember_me.setChecked(getChecked);
+        }
     }
 
     private void showToast(String message){

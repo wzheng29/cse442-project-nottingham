@@ -27,10 +27,12 @@ public class register extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
 
-        Button signup;
+        Button signup,login;
 
         signup = (Button)findViewById(R.id.signup_register_button);
+        login = (Button)findViewById(R.id.login_button2);
         signup.setBackgroundColor(Color.WHITE);
+        login.setBackgroundColor(Color.WHITE);
 
         firstName = (EditText)findViewById(R.id.firstName);
         lastName = (EditText)findViewById(R.id.lastName);
@@ -39,6 +41,7 @@ public class register extends AppCompatActivity {
         repassword = (EditText)findViewById(R.id.repassword_signup);
 
         signup.setOnClickListener(v -> add());
+        login.setOnClickListener(v -> openLogin());
 
     }
 

@@ -30,7 +30,7 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 
 public class MainActivity extends AppCompatActivity {
-    private Button quick_access;
+    private Button quick_access, logout;
     private ArrayAdapter<String> arrayAdapter;
     private ListView searchList;
     private String[] stock_list;
@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        logout = (Button)findViewById(R.id.logout);
+        logout.setBackgroundColor(Color.WHITE);
+        logout.setOnClickListener(v -> openLogin());
+
         searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,6 +116,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openQuickAccess(){
         Intent intent  = new Intent(this, quick_access.class);
+        startActivity(intent);
+    }
+
+    private void openLogin(){
+        Intent intent = new Intent(this,login.class);
         startActivity(intent);
     }
 
