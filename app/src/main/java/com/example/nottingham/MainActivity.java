@@ -90,8 +90,9 @@ public class MainActivity extends AppCompatActivity {
         quick_access.setOnClickListener(v -> openQuickAccess());
 
         searchList.setOnItemClickListener((parent, view, position, id) -> {
-            String name = arrayAdapter.getItem(position);
-            openRealTime(name,getSymbol(name));
+                    String name = arrayAdapter.getItem(position);
+                    openRealTime(name, getSymbol(name));
+                });
         logout = (Button)findViewById(R.id.logout);
         logout.setBackgroundColor(Color.WHITE);
         logout.setOnClickListener(v -> openLogin());
@@ -206,4 +207,4 @@ public class MainActivity extends AppCompatActivity {
         return "GME";
     }
 
-}
+}}
