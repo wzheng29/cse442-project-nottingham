@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemActionExpand(MenuItem item) {
                 searchList.setVisibility(View.VISIBLE);
                 quick_access.setVisibility(View.GONE);
+                logout.setVisibility(View.GONE);
                 searchList.bringToFront();
                 return true;
             }
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 searchList.setVisibility(View.GONE);
                 quick_access.setVisibility(View.VISIBLE);
+                logout.setVisibility(View.VISIBLE);
                 return true;
             }
         });
