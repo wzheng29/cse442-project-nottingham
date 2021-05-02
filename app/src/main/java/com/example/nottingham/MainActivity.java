@@ -30,7 +30,7 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 
 public class MainActivity extends AppCompatActivity {
-    private Button quick_access;
+    private Button quick_access, logout;
     private ArrayAdapter<String> arrayAdapter;
     private ListView searchList;
     private static String[] stock_list;
@@ -92,6 +92,16 @@ public class MainActivity extends AppCompatActivity {
         searchList.setOnItemClickListener((parent, view, position, id) -> {
             String name = arrayAdapter.getItem(position);
             openRealTime(name,getSymbol(name));
+        logout = (Button)findViewById(R.id.logout);
+        logout.setBackgroundColor(Color.WHITE);
+        logout.setOnClickListener(v -> openLogin());
+
+        searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = arrayAdapter.getItem(position);
+                openRealTime(name,getSymbol(name));
+            }
         });
     }
 
@@ -104,6 +114,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openQuickAccess(){
         Intent intent  = new Intent(this, quick_access.class);
+        startActivity(intent);
+    }
+
+    private void openLogin(){
+        Intent intent = new Intent(this,login.class);
         startActivity(intent);
     }
 
@@ -126,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemActionExpand(MenuItem item) {
                 searchList.setVisibility(View.VISIBLE);
                 quick_access.setVisibility(View.GONE);
+                logout.setVisibility(View.GONE);
                 searchList.bringToFront();
                 return true;
             }
@@ -134,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 searchList.setVisibility(View.GONE);
                 quick_access.setVisibility(View.VISIBLE);
+                logout.setVisibility(View.VISIBLE);
                 return true;
             }
         });

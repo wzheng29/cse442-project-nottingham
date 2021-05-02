@@ -68,10 +68,20 @@
         android:id="@+id/button"
         android:layout_width="300dp"
         android:layout_height="80dp"
+        android:layout_marginTop="520dp"
+        android:layout_centerHorizontal="true"
+        android:text="Quick Access"
+        android:textSize="30dp"
+        android:background="@color/white"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="33dp"
-        android:text="Quick Access"
+        android:text="LOGOUT"
         android:textSize="30dp"
         android:background="@color/white"
         android:textColor="@color/black"/>
