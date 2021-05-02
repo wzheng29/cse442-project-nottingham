@@ -61,16 +61,58 @@ public class previous_trend extends AppCompatActivity {
         }
         Python python = Python.getInstance();
         PyObject pythonFile = python.getModule("oldTrend");
-        PyObject helloWorldString = pythonFile.callAttr("getPrice",symbol);
-        oldprice.setText("Price 5 Years ago is $"+helloWorldString.toString());
+
+        Thread runnable = new Thread() {
+            @Override
+            public void run() {
+
+                PyObject helloWorldString = pythonFile.callAttr("getPrice",symbol);
+
+
+                oldprice.post(new Runnable() {
+                                       @Override
+                                       public void run() {
+                                           oldprice.setText("Price 5 Years ago is $"+helloWorldString.toString());
+                                       }
+                                   }
+
+                );
+
+            }
+        };
+        (runnable).start();
+        runnable.interrupt();
+
+
 
         // Display Stock Trend
+
         previousTrend = (ImageView) findViewById(R.id.previousTrend);
-        PyObject frame = pythonFile.callAttr("Plotter",symbol,"2021-02-20");
-        byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
-        Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
-        previousTrend.setImageBitmap(bMapScaled);
+
+        Thread runnablePLot = new Thread() {
+            @Override
+            public void run() {
+
+                PyObject frame = pythonFile.callAttr("Plotter",symbol,"2021-02-20");
+
+
+                previousTrend.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
+                        Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
+                        previousTrend.setImageBitmap(bMapScaled);
+                    }
+                });
+
+            }
+        };
+        (runnablePLot).start();
+        runnablePLot.interrupt();
+
+
+
     }
     public void openHome3(){
         Intent intent  = new Intent(this, MainActivity.class);
