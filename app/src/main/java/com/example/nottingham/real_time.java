@@ -22,6 +22,7 @@ import com.chaquo.python.android.AndroidPlatform;
 public class real_time extends AppCompatActivity {
     private Button backHome;
     private  Button openFuture;
+    private Button openPrevious;
     TextView realTimePrice;
     TextView stockName;
     ImageView currentPriceTrend;
@@ -38,8 +39,6 @@ public class real_time extends AppCompatActivity {
         String name = bundle.getString("name");
         String symbol = bundle.getString("symbol");
 
-
-
         //Set page name
         stockName = (TextView)findViewById(R.id.stockName);
         stockName.setText(name);
@@ -54,33 +53,75 @@ public class real_time extends AppCompatActivity {
         openFuture.setBackgroundColor(Color.WHITE);
         openFuture.setOnClickListener(v -> openFuture(name, symbol));
 
+        // Go to the  previous trend page implementation
+        openPrevious = (Button)findViewById(R.id.openPrevious);
+        openPrevious.setBackgroundColor(Color.WHITE);
+        openPrevious.setOnClickListener(v -> openPrevious(name, symbol));
+
         // Save Button Implementation
         saveButton = (ImageButton)findViewById(R.id.heartSave);
         saveButton.setOnClickListener(v -> saveStock(name, symbol));
         //pre set state of save button
         if(QuickAccessData.contains(name)) saveButton.setBackgroundResource(R.drawable.save_btn_selector);
-
-        // Display Stock price
-        realTimePrice = (TextView) findViewById(R.id.realTimePrice);
-            //Using chaquopy and script
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(this));
         }
         Python python = Python.getInstance();
         PyObject pythonFile = python.getModule("RealTimePython");
-        PyObject helloWorldString = pythonFile.callAttr("getPrice",symbol);
-        realTimePrice.setText("$"+helloWorldString.toString());
+        // Display Stock price
+        realTimePrice = (TextView) findViewById(R.id.realTimePrice);
+            //Using chaquopy and script
+        Thread runnable = new Thread() {
+            @Override
+            public void run() {
+
+                PyObject helloWorldString = pythonFile.callAttr("getPrice",symbol);
+
+
+                realTimePrice.post(new Runnable() {
+                                         @Override
+                                         public void run() {
+                                             realTimePrice.setText("$"+helloWorldString.toString());
+                                         }
+                                     }
+
+                );
+
+            }
+        };
+        (runnable).start();
+        runnable.interrupt();
+
+
 
 
 
         // Display Stock Trend
         currentPriceTrend = (ImageView) findViewById(R.id.currentPriceTrend);
-       PyObject frame = pythonFile.callAttr("Plotter",symbol,"2021-02-20");
-        byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
-        Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
-        currentPriceTrend.setImageBitmap(bMapScaled);
 
+
+
+        Thread runnablePLot = new Thread() {
+            @Override
+            public void run() {
+
+                PyObject frame = pythonFile.callAttr("Plotter",symbol,"2021-02-20");
+
+
+                currentPriceTrend.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
+                        Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
+                        currentPriceTrend.setImageBitmap(bMapScaled);
+                    }
+                });
+
+            }
+        };
+        (runnablePLot).start();
+        runnablePLot.interrupt();
     }
     //Acts when Heart is clicked, adds or removes to quick access data
     public void saveStock(String stockName, String stockSymbol){
@@ -104,10 +145,13 @@ public class real_time extends AppCompatActivity {
         intent.putExtra("symbol",stock_symbol);
         startActivity(intent);
 
+    }
 
-
-    // Get the price from API and show it from the TextView "realTimePrice"
-
+    public void openPrevious(String stock_name, String stock_symbol){
+        Intent intent  = new Intent(this, previous_trend.class);
+        intent.putExtra("name",stock_name);
+        intent.putExtra("symbol",stock_symbol);
+        startActivity(intent);
 
     }
 
