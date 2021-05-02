@@ -25,6 +25,7 @@ public class previous_trend extends AppCompatActivity {
 
     private Button backHome3;
     private Button backReal2;
+    TextView oldprice;
     ImageView previousTrend;
     TextView stockName3;
 
@@ -52,6 +53,24 @@ public class previous_trend extends AppCompatActivity {
         backReal2 = (Button)findViewById(R.id.backReal2);
         backReal2.setBackgroundColor(Color.WHITE);
         backReal2.setOnClickListener(v -> openReal2(name, symbol));
+
+        oldprice = (TextView) findViewById(R.id.oldPrice2);
+        //Using chaquopy and script
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(this));
+        }
+        Python python = Python.getInstance();
+        PyObject pythonFile = python.getModule("oldTrend");
+        PyObject helloWorldString = pythonFile.callAttr("getPrice",symbol);
+        oldprice.setText("Price 5 Years ago is $"+helloWorldString.toString());
+
+        // Display Stock Trend
+        previousTrend = (ImageView) findViewById(R.id.previousTrend);
+        PyObject frame = pythonFile.callAttr("Plotter",symbol,"2021-02-20");
+        byte[] frameData = python.getBuiltins().callAttr("bytes", frame).toJava(byte[].class);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(frameData, 0, frameData.length);
+        Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 1500, 1500, true);
+        previousTrend.setImageBitmap(bMapScaled);
     }
     public void openHome3(){
         Intent intent  = new Intent(this, MainActivity.class);
