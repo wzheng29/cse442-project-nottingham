@@ -1,23 +1,34 @@
 package com.example.nottingham;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class quick_access extends AppCompatActivity {
 
@@ -29,11 +40,20 @@ public class quick_access extends AppCompatActivity {
     LinearLayout vl;
     Button backHome;
     LinearLayout divider;
+    private ArrayAdapter<String> arrayAdapter;
+    private List<String> stock_names;
+    private ListView searchList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_access);
+
+        stock_names = new ArrayList<String>();
+        //Set search bar ListView to GONE when app launches
+        searchList = (ListView)findViewById(R.id.searchList);
+        searchList.setVisibility(View.GONE);
+        searchList.setBackgroundColor(Color.WHITE);
 
         vl = findViewById(R.id.saved_holder);
         HashMap<String, String> savedStocks = QuickAccessData.getStorageList();
@@ -81,6 +101,8 @@ public class quick_access extends AppCompatActivity {
             //buttParams.gravity = Gravity.LEFT;
             buttName.setLayoutParams(buttParams);
 
+            stock_names.add(name);
+
             //Initialize button to unsave
             buttHeart = new ImageButton(this);
             buttHeart.setBackgroundResource(R.drawable.save_btn_selector);
@@ -97,11 +119,20 @@ public class quick_access extends AppCompatActivity {
             hl.addView(buttHeart);
             hl.addView(buttName);
             hl.addView(tvChange);
+            vl.addView(hl);
+
             vl_mini.addView(hl);
             vl_mini.addView(divider);
             vl.addView(vl_mini);
         }
 
+        //Filter search list
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stock_names);
+        searchList.setAdapter(arrayAdapter);
+        searchList.setOnItemClickListener((parent, view, position, id) -> {
+            String name = arrayAdapter.getItem(position);
+            openRealTime(name,MainActivity.getSymbol(name));
+        });
     }
     public void setColor(TextView tv, String s){
         if(s.contains("+")){
@@ -125,9 +156,56 @@ public class quick_access extends AppCompatActivity {
         vl.removeViewInLayout(v);
         vl.setGravity(Gravity.TOP);
         QuickAccessData.remove(name);
+        arrayAdapter.remove(name);
     }
     public void returnHome(){
         Intent intent  = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+    //Search bar setup
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_home,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search_home);
+        //Associate searchable config with SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setQueryHint("Search...");
+
+        //Display search ListView only when the search bar is expanded
+        menuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                searchList.setVisibility(View.VISIBLE);
+                backHome.setVisibility(View.GONE);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                searchList.setVisibility(View.GONE);
+                backHome.setVisibility(View.VISIBLE);
+                return true;
+            }
+        });
+
+        //Filtering search bar text
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                arrayAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+        return true;
     }
 }
