@@ -25,44 +25,49 @@
         android:id="@+id/heartSave2"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="45dp"
         android:background="@drawable/unsaved_btn_selector"
         app:layout_constraintBottom_toTopOf="@+id/stockName2"
-        app:layout_constraintStart_toStartOf="@+id/stockName2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backHome2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/futureTimePrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="161dp"
+        android:layout_marginRight="161dp"
+        android:layout_marginBottom="542dp"
+        android:text="$0.0"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heartSave2"
+        app:layout_constraintVertical_bias="0.453" />
 
     <TextView
         android:id="@+id/stockName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="271dp"
-        android:layout_marginRight="271dp"
-        android:layout_marginBottom="574dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginBottom="543dp"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backHome2"
-        app:layout_constraintVertical_bias="0.815" />
-
-    <ImageView
-        android:id="@+id/futurePriceTrend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="37dp"
-        android:scaleX="1.3"
-        android:scaleY="1.3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/futureTimePrice"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintTop_toTopOf="@+id/heartSave2" />
 
     <Button
         android:id="@+id/backReal"
@@ -80,26 +85,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/futureTimePrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="290dp"
-        android:layout_marginRight="290dp"
-        android:layout_marginBottom="542dp"
-        android:text="$0.0"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stockName2"
-        app:layout_constraintVertical_bias="1.0" />
-
     <NumberPicker
         android:id="@+id/numberPicker_main"
         android:layout_width="50dp"
@@ -107,10 +92,27 @@
         android:background="#57673AB7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.819"
+        app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146"></NumberPicker>
+        app:layout_constraintVertical_bias="0.243"></NumberPicker>
+
+    <ImageView
+        android:id="@+id/futurePriceTrend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="37dp"
+        android:scaleX="1.3"
+        android:scaleY="1.3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/futureTimePrice"
+        app:layout_constraintVertical_bias="0.062"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <TextView
         android:id="@+id/textView"
@@ -120,10 +122,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintHorizontal_bias="0.989"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.282" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
