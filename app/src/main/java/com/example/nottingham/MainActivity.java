@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         Spannable microsoftWord = new SpannableString("MSFT " + MicrosoftChange.toString() + "%        ");
         microsoftWord.setSpan(new ForegroundColorSpan(getColor(MicrosoftChange.toString())), 0, microsoftWord.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         megaTicker1.append(microsoftWord);
+        megaTicker1.append(padding);
         megaTicker1.setSelected(true);
         /*PyObject AmazonChange = pyobj.callAttr("getChange", "AMZN");
         Spannable amazonWord = new SpannableString("AMZN " + AmazonChange.toString() + "%  ");
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         Spannable babaWord = new SpannableString("BABA " + BABAChange.toString() + "%     ");
         babaWord.setSpan(new ForegroundColorSpan(getColor(BABAChange.toString())), 0, babaWord.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         megaTicker2.append(babaWord);
+        megaTicker2.append(padding);
         megaTicker2.setSelected(true);
         /*PyObject FBChange = pyobj.callAttr("getChange", "FB");
         Spannable fbWord = new SpannableString("FB " + FBChange.toString() + "%  ");
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         Spannable jpmWord = new SpannableString("JPM " + JPMChange.toString() + "%          ");
         jpmWord.setSpan(new ForegroundColorSpan(getColor(JPMChange.toString())), 0, jpmWord.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         megaTicker3.append(jpmWord);
+        megaTicker3.append(padding);
         megaTicker3.setSelected(true);
         /*PyObject VISAChange = pyobj.callAttr("getChange", "V");
         Spannable visaWord = new SpannableString("V " + VISAChange.toString() + "%  ");
