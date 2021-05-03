@@ -25,12 +25,11 @@
         android:id="@+id/heartSave"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
+
         android:background="@drawable/unsaved_btn_selector"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/stockName" />
+        app:layout_constraintBottom_toTopOf="@+id/stockName"
+        app:layout_constraintStart_toStartOf="@+id/stockName"
+        app:layout_constraintTop_toBottomOf="@+id/backHome" />
 
     <TextView
         android:id="@+id/stockName"
@@ -38,14 +37,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="180dp"
         android:layout_marginEnd="271dp"
         android:layout_marginRight="271dp"
         android:layout_marginBottom="574dp"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/numberPicker_main"
         app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backHome"
@@ -55,21 +54,19 @@
         android:id="@+id/realTimePrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="290dp"
-        android:layout_marginRight="290dp"
-        android:layout_marginBottom="542dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginLeft="77dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="161dp"
+        android:layout_marginRight="161dp"
+        android:layout_marginBottom="505dp"
         android:text="$0.0"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@+id/openPrevious"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stockName"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/heartSave" />
 
     <ImageView
         android:id="@+id/currentPriceTrend"
@@ -103,4 +100,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/realTimePrice"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/openPrevious"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="472dp"
+        android:text="Previous"
+        android:textColor="#151515"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openFuture" />
 </androidx.constraintlayout.widget.ConstraintLayout>
